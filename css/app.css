@@ -1,0 +1,9 @@
+html,body {
+	min-height:100vh;
+}
+
+img {
+	max-width: 100%;
+	display: inline-block;
+	vertical-align: middle;
+}
