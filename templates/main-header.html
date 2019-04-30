@@ -10,6 +10,12 @@
                     <button type="button" ng-click="$root.openModal('#modal_login')">Login</button>
                 </li>
             </ul>
+            <ul class="navbar-nav" ng-if="$root.token">
+                <li class="nav-item">
+                    <button type="button" ng-click="log_user_out()">Logout</button>
+                </li>
+            </ul>
+
 
             
             <ul class="navbar-nav" ng-if="$root.token">

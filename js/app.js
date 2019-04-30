@@ -77,6 +77,12 @@
 
             });
         }
+
+        $scope.log_user_out = function() {
+
+        $auth.logout()
+            
+        }
     });
 
 
