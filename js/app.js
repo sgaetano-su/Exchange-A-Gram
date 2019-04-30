@@ -47,7 +47,82 @@
     });
 
 
+    app.controller('feedCtrl', function(){
+        //Controller logic here
+    });
+
+    app.controller('feedItemCtrl', function(){
+        //Controller logic here
+    });
+
+    app.controller('uploadCtrl', function(){
+        //Controller logic here
+    });
+
+    app.controller('profileCtrl', function(){
+        //Controller logic here
+    });
+
+
+
+    app.controller('mainCtrl', function($scope, $auth, $rootScope) {
+        $scope.username = '';
+        $scope.password = '';
+
+        $scope.log_user_in = function() {
+            $auth.login($scope.username, $scope.password, function() {
+                console.log('user logged in successfully');
+                //Closes Modal Automatically
+                $rootScope.closeModal('#modal_login');
+
+            });
+        }
+    });
+
+
     //Components
+    app.component('mainHeader', {
+        templateUrl:'/templates/main-header.html', 
+        controller: 'mainCtrl'
+
+    })
+
+    app.component('postPreview', {
+        templateUrl:'/templates/post-preview.html', 
+        controller: 'indexCtrl'
+
+    })
+
+    app.component('index', {
+        templateUrl:'/templates/index.html', 
+        controller: 'indexCtrl'
+
+    })
+
+    app.component('feed', {
+        templateUrl:'/templates/feed.html', 
+        controller: 'mainCtrl'
+
+    })
+
+    app.component('feedItem', {
+        templateUrl:'/templates/feed-item.html', 
+        controller: 'mainCtrl'
+
+    })
+
+    app.component('upload', {
+        templateUrl:'/templates/upload.html', 
+        controller: 'mainCtrl'
+
+    })
+
+    app.component('profile', {
+        templateUrl:'/templates/profile.html', 
+        controller: 'mainCtrl'
+
+    })
+
 
     
 })();
