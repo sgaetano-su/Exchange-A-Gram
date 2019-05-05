@@ -17,9 +17,21 @@
             </ul>
 
 
+            <ul class="navbar-nav" ng-if="$root.token">
+                <a class="text-white"  ui-sref="feed">Feed</a>
+            </ul>
+
+            <ul class="navbar-nav" ng-if="$root.token">
+                <a class="text-white" ui-sref="upload">Upload</a>
+            </ul>
+
+                        
+            <ul class="navbar-nav" ng-if="$root.token">
+                <a class="text-white"  ui-sref="profile({id:$root.auth.id})">Profile</a>
+            </ul>
             
             <ul class="navbar-nav" ng-if="$root.token">
-                User Is Logged In
+                <a class="text-white"  ui-sref="logout">Logout</a>
             </ul>
 
         </div>

@@ -1,0 +1,10 @@
+<body id="feed" class="row py-5 border-bottom" ng-controller="feedCtrl">
+        <h2 class="col-12 text-center font-weight-light text-dark mb-4">Feed</h2>
+
+        <feed-photos class="col-6" ng-repeat="image in images" item="image">
+            <img ng-src={{image.image}}>
+        </feed-photos>
+
+
+
+</body>
