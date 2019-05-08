@@ -1,19 +1,29 @@
-<body>
 
-    <form method="POST" action="https://exchangeagram.azurewebsites.net/api/upload" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="ImageSelect">Select Image:</label>
-                <input type="file" class="form-control" name="image" id="image">
-            </div>
-            <div class="form-group">
-                <label for="InputCaption">Enter A Caption:</label>
-                <input type="text" class="form-control" name="caption" id="caption" placeholder="Insert Caption">
-            </div>
-            <div>
-                    <input type="hidden" name="token" id="token" value="{{$root.token}}">
-                    <input type="hidden" name="redirect" id="redirect" value="http://127.0.0.1:8080/#!/upload" />
-            </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
-    </form>
+    <div class = "container bg-light p-5 m-5" >
 
-</body>
+        <h1 class = "text-center">Exchange A New Gram</h1>
+            <form method="POST" action="https://exchangeagram.azurewebsites.net/api/upload" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="ImageSelect">Select Image:</label>
+                        <input type="file" class="form-control" name="image" id="image">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputCaption">Enter A Caption:</label>
+                        <textarea type="text" rows="3" class="form-control" name="caption" id="caption" placeholder="Insert Caption">
+                        </textarea>
+                    </div>
+
+                    <div>
+                            <input type="hidden" name="token" id="token" value=14oXeQr2u4ZjVHPLO7OSLIRc8GvjMACjxUjVMc2F>
+                            <input type="hidden" name="redirect" id="redirect" value="http://127.0.0.1:8080/#!/upload" />
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
+            </form>
+            
+    </div>
+</div>

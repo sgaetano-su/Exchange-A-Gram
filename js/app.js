@@ -21,7 +21,7 @@
             })
 
             .state('feedItem', {
-                url:'/feed:id',
+                url:'/feed/:id',
                 templateUrl:'/templates/feed-item.html',
                 controller:'feedItemCtrl'
             })
@@ -76,34 +76,55 @@
 
 
     app.controller('feedCtrl', function($scope, $http){
-
-        $scope.images=[];
-
+        $scope.posts=[];
+ 
         $http({
             url: 'https://exchangeagram.azurewebsites.net/api/media',
             method: 'GET',
             params: {
                 token:token,
-                count:13,
-                page:'1',      
+                page:'1',
+                count:12, 
+   
             }
 
             })
             .then(function(response) {
                 console.log(response.data.data);
-                $scope.images = response.data.data
+                $scope.posts = response.data.data
             },
             function(error) {
                 console.log(error);
 
         });
+
+        $scope.loadmore = function() {
+            $http({
+                url: 'https://exchangeagram.azurewebsites.net/api/media',
+                method: 'GET',
+                params: {
+                    token:token,
+                    page:2,
+                    count:12, 
+                    id:'', 
+                    user_id:'',    
+                }
+                
+                })
+                .then(function(response) {
+                    console.log(response.data.data);
+                    var new_posts = response.data.data
+                    $scope.posts.push(new_posts)
+                },
+                function(error) {
+                    console.log(error);
+    
+            });
+        
+        } 
     });
-
-    app.controller('feedItemCtrl', function($scope, $http){
-
-    });
-
-    app.controller('uploadCtrl', function($scope, $rootScope){
+    
+    app.controller('uploadCtrl', function($scope, $rootScope, $state, $window){
         let url = $window.location.href;
 
         if (url.includes('success=') && url.includes('id=')) { 
@@ -115,10 +136,37 @@
         
     });
 
-    app.controller('profileCtrl', function($scope, $http) {
+    app.controller('feedItemCtrl', function($scope, $http, $rootScope, $stateParams) {
+        $scope.posts = [];
+
+
         $http({
             url: 'https://exchangeagram.azurewebsites.net/api/media',
-            method: 'POST',
+            method: 'GET',
+            params: {
+                token:token,
+                count:12,
+                id:$stateParams.id,      
+            }
+
+            })
+            .then(function(response) {
+                console.log(response.data.data);
+                
+                $scope.posts=response.data.data[0];
+
+            },
+            function(error) {
+                console.log(error);
+
+        });
+
+    });
+
+    app.controller('profileCtrl', function($scope, $http) {
+        $http({
+            url: 'https://exchangeagram.azurewebsites.net/api/user',
+            method: 'GET',
             params: {
                 token:token,
                 id:'',
@@ -135,27 +183,6 @@
 
     });
 
-
-    app.controller('profileEditCtrl',function(){
-        $http({
-            url: 'https://exchangeagram.azurewebsites.net/api/media',
-            method: 'POST',
-            params: {
-                token:token,
-                username:'',
-                bio:'',      
-            }
-
-            })
-            .then(function(response) {
-                console.log(response.data);
-            },
-            function(error) {
-                console.log(error);
-
-        });
-    
-    });
 
 
     app.controller('mainCtrl', function($scope, $auth, $rootScope) {
@@ -188,7 +215,10 @@
 
     app.component('postPreview', {
         templateUrl:'/templates/post-preview.html', 
-        controller: 'indexCtrl'
+        controller: 'indexCtrl',
+        bindings:{
+            post:'<'
+        },
 
     })
 
