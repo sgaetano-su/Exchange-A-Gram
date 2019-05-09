@@ -20,3 +20,23 @@ img {
 	margin-right:auto;
 	display:block;
   }
+
+
+.navbar > .container, .navbar > .container-fluid {
+	justify-content: end;
+}
+
+
+.postlikes {
+	height:30px;
+}
+
+.navbar-collapse {
+	flex-grow: 0;
+}
+
+
+.headerimg {
+	height:30px;
+	width:30px;
+}

@@ -1,73 +1,76 @@
 <header>
-    <nav class="navbar bg-primary navbar-dark">
+    <nav class="navbar bg-primary navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand">
                 <img src="/images/logo.png" alt="Exchange-A-Gram Logo - Go to Homepage"/>
             </a>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <!--<ul class="navbar-nav" ng-if="!$root.token">
-                <li class="nav-item">
-                    <button type="button" ng-click="$root.openModal('#modal_login')">Login</button>
-                </li>
-            </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav" ng-if="!$root.token">
+                        <li class="nav-item">
+                            <a class="text-white" ui-sref="" ng-click="$root.openModal('#modal_login')">Login</a>
+                        </li>
+                </ul>
 
-            <ul class="navbar-nav" ng-if="$root.token">
-                <li class="nav-item">
-                    <button type="button" ng-click="log_user_out()">Logout</button>
-                </li>
-            </ul>
-            -->
-            <ul class="navbar-nav" ng-if="!$root.token">
+                <ul class="navbar-nav collapse  mx-3" ng-if="$root.token">
+                    <a class="text-white"  ui-sref="feed">Feed</a>
+                </ul>
+
+                <ul class="navbar-nav collapse mx-3" ng-if="$root.token">
+                    <a class="text-white" ui-sref="upload">Upload</a>
+                </ul>
+
+                            
+                <ul class="navbar-nav collapse  mx-3" ng-if="$root.token">
+                    <a class="text-white"  ui-sref="profile({id:$root.auth.id})">Profile</a>
+                </ul>
+    
+                <ul class="navbar-nav  mx-3" ng-if="$root.token">
                     <li class="nav-item">
-                        <a class="text-white" ui-sref="" ng-click="$root.openModal('#modal_login')">Login</a>
+                        <a class="text-white" ui-sref="" ng-click="log_user_out()">Logout</a>
                     </li>
-            </ul>
+                </ul>
 
+                <ul class="navbar-nav ml-5 pl-5" ng-if="$root.token">
+                    <a class="text-white">Welcome, {{$root.auth.username}}</a>
+                    <img class = "headerimg mx-1" ng-src = "https://exchangeagram.azurewebsites.net/assets/images/default_profile.png"/>
+                </ul>
 
-
-
-            <ul class="navbar-nav" ng-if="$root.token">
-                <a class="text-white"  ui-sref="feed">Feed</a>
-            </ul>
-
-            <ul class="navbar-nav" ng-if="$root.token">
-                <a class="text-white" ui-sref="upload">Upload</a>
-            </ul>
-
-                        
-            <ul class="navbar-nav" ng-if="$root.token">
-                <a class="text-white"  ui-sref="profile({id:$root.auth.id})">Profile</a>
-            </ul>
- 
-            <ul class="navbar-nav" ng-if="$root.token">
-                <li class="nav-item">
-                    <a class="text-white" ui-sref="" ng-click="log_user_out()">Logout</a>
-                </li>
-             </ul>
+            </div>
 
         </div>
     </nav>
 </header>
 
-<div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Login</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form ng-submit="log_user_in()">
-            <input type="text" ng-model="username" placeholder="Username"/> 
-            <br/> 
-            <input type="password" ng-model="password" placeholder="Password"/>
-            <br/>
 
-            <button type="submit">Log In</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+<div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+     
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form ng-submit="log_user_in()">
+     
+                   <label for="exampleFormControlFile1">Username</label>
+                     <input type="text" ng-model="username" class="form-control"  placeholder="Username"/>
+                      <label for="exampleFormControlFile1">Password</label>
+     
+                            <input type="password" class="form-control" ng-model="password" placeholder="Password"/>
+                    <div class="row">
+                        <button class="btn-primary my-2 mx-auto"type="submit">Log In</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+     </div>

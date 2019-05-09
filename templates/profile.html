@@ -1,1 +1,28 @@
-test
+<div class = "container" >
+        <div class = "row my-2">
+            
+
+                <div class = "col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-2">
+                    <img ng-src = "https://exchangeagram.azurewebsites.net/assets/images/default_profile.png"/>
+                </div>
+                <div class = "col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-10">
+                        <a class = "display-4 font-weight-light" >{{profileinfo.username}}</a>
+                </br>
+                        <a class = "display-5">{{profileinfo.bio}}</a>
+                    </div>
+
+       
+        </div>
+
+        <section class = "row">
+                <div class="col-12 mt-3">
+                    <div class="row ">
+                            <a ui-sref="feedItem({id:post.id})"  class="col-xs-4 col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4" ng-repeat="post in posts">
+                                <img  ng-src={{post.image}}>
+                            </a>
+                    </div>
+        
+                </div>
+        </section>
+        
+</div>

@@ -3,7 +3,6 @@
     //Create a module
     let app = angular.module('app', ['ui.router', 'istAuth']);
 
-    var token = "14oXeQr2u4ZjVHPLO7OSLIRc8GvjMACjxUjVMc2F"
     //Config Block
     app.config(function($stateProvider, $urlRouterProvider) {
         //Configure the routes for the application
@@ -75,15 +74,15 @@
     });
 
 
-    app.controller('feedCtrl', function($scope, $http){
+    app.controller('feedCtrl', function($scope, $http, $rootScope){
         $scope.posts=[];
- 
+        $scope.pageCount = 1
         $http({
             url: 'https://exchangeagram.azurewebsites.net/api/media',
             method: 'GET',
             params: {
-                token:token,
-                page:'1',
+                token:$rootScope.token,
+                page:$scope.pageCount,
                 count:12, 
    
             }
@@ -91,7 +90,7 @@
             })
             .then(function(response) {
                 console.log(response.data.data);
-                $scope.posts = response.data.data
+                $scope.posts = response.data.data;
             },
             function(error) {
                 console.log(error);
@@ -99,22 +98,27 @@
         });
 
         $scope.loadmore = function() {
+           
+           $scope.pageCount = $scope.pageCount + 1;
+
             $http({
                 url: 'https://exchangeagram.azurewebsites.net/api/media',
                 method: 'GET',
                 params: {
-                    token:token,
-                    page:2,
+                    token:$rootScope.token,
+                    page:$scope.pageCount,
                     count:12, 
-                    id:'', 
-                    user_id:'',    
+   
                 }
                 
                 })
                 .then(function(response) {
-                    console.log(response.data.data);
-                    var new_posts = response.data.data
-                    $scope.posts.push(new_posts)
+                    console.log(response);
+
+                    response.data.data.forEach(function(post) {
+                        $scope.posts.push(post);
+                    })
+                    
                 },
                 function(error) {
                     console.log(error);
@@ -144,7 +148,7 @@
             url: 'https://exchangeagram.azurewebsites.net/api/media',
             method: 'GET',
             params: {
-                token:token,
+                token:$rootScope.token,
                 count:12,
                 id:$stateParams.id,      
             }
@@ -163,18 +167,26 @@
 
     });
 
-    app.controller('profileCtrl', function($scope, $http) {
+    app.controller('profileCtrl', function($scope,$stateParams, $http, $rootScope) {
+        $scope.posts = [];
+
+        $scope.profileinfo = [];
+
         $http({
             url: 'https://exchangeagram.azurewebsites.net/api/user',
             method: 'GET',
             params: {
-                token:token,
-                id:'',
+                token:$rootScope.token,
+                id:$stateParams.id,
             }
 
             })
             .then(function(response) {
-                console.log(response.data);
+                console.log(response.data.data);
+                
+                $scope.posts=response.data.data.media;
+                
+                $scope.profileinfo = response.data.data;
             },
             function(error) {
                 console.log(error);
@@ -215,10 +227,9 @@
 
     app.component('postPreview', {
         templateUrl:'/templates/post-preview.html', 
-        controller: 'indexCtrl',
         bindings:{
             post:'<'
-        },
+        }
 
     })
 
